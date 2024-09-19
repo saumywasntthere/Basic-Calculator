@@ -16,7 +16,7 @@ int main()
     while(1)
     {
         printf("Enter the first number: ");
-        if(scanf("%f", &num1) == 1)
+        if(scanf("%f", &num1) == 1) //If input matches the provided parameters it breaks, else reprompts 
         {
             break;
         }
@@ -32,7 +32,7 @@ int main()
     while(1)
     {
         printf("Choose a function (+, -, *, /): ");
-        if(scanf("%c", &function) == 1 && (function == '+' || function == '-' || function == '*' || function == '/'))
+        if(scanf("%c", &function) == 1 && (function == '+' || function == '-' || function == '*' || function == '/')) //If input is only 1 character and is only either +, -, *, / then it breaks 
         {
             break;
         }
@@ -43,7 +43,7 @@ int main()
         }
     }
 
-    if(function == '/')
+    if(function == '/') //If the function is division, it will not accept 0 as the numerator.
     {
         do
         {
@@ -96,22 +96,22 @@ int main()
     return 0;
 }
 
-float add(float i, float j)
+float add(float i, float j) //addition function
 {
     return i + j;
 }
 
-float subtract(float i, float j)
+float subtract(float i, float j) //subtraction function
 {
     return i - j;
 }
 
-float multiply(float i, float j)
+float multiply(float i, float j) //multiply function
 {
     return i * j;
 }
 
-float divide(float i, float j)
+float divide(float i, float j) //divide function
 {
     return i / j;
 }
