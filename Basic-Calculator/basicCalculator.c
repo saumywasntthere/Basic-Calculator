@@ -1,117 +1,114 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-float add(float i, float j);
-float subtract(float i, float j);
-float multiply(float i, float j);
-float divide(float i, float j);
+int add(int input1, int input2);
+int subtract(int input1, int input2);
+int multiply(int input1, int input2);
+int divide(int input1, int input2);
 
 int main()
 {
+    int num1, num2;
     char function;
-    float num1;
-    float num2;
-    float result;
+    int answer;
 
     while(1)
     {
-        printf("Enter the first number: ");
-        if(scanf("%f", &num1) == 1) //If input matches the provided parameters it breaks, else reprompts 
+        printf("Enter first number: ");
+        if(scanf("%d", &num1) == 1)
         {
             break;
         }
         else
         {
-            printf("This is not a number. Please enter a number.\n");
-            while(getchar() != '\n');
+            printf("Please enter a number. \n");
+            while (getchar() != '\n');
         }
     }
-
-    getchar();
-
     while(1)
     {
-        printf("Choose a function (+, -, *, /): ");
-        if(scanf("%c", &function) == 1 && (function == '+' || function == '-' || function == '*' || function == '/')) //If input is only 1 character and is only either +, -, *, / then it breaks 
+        printf("Enter the function (+, -, *, /): ");
+        if(scanf(" %c", &function) == 1 && (function == '+' || function == '-' || function == '*' || function == '/') )
         {
             break;
         }
         else
         {
-            printf("Invalid function. Please choose +, -, * or /.\n");
-            while(getchar() != '\n');
+            printf("This is not a suitable function. Please enter either +, -, * or /. \n");
+            while (getchar() != '\n');
         }
     }
-
-    if(function == '/') //If the function is division, it will not accept 0 as the numerator.
+    if(function == '/')
     {
-        do
+        while(1)
         {
-            while(1)
+            printf("Enter second number (not 0): ");
+            if(scanf("%d", &num2) == 1 && num2 != 0)
             {
-                printf("Enter the second number (not 0): ");
-                if(scanf("%f", &num2) == 1 && num2 != 0)
-                {
-                    break;
-                }
-                else
-                {
-                    printf("This is not an accepted value. Please enter a number greater than 0.\n");
-                    while(getchar() != '\n');
-                }
+                break;
+            }
+            else
+            {
+                printf("Please enter a suitable input (number that is not 0). \n");
+                while (getchar() != '\n');
             }
         }
-        while (num2 == 0);
     }
     else
     {
-        printf("Enter the second number: ");
-        while(scanf("%f", &num2) != 1)
+        while(1)
         {
-            printf("Invalid input. \nPlease enter a valid number: ");
-            while(getchar() != '\n');
+            printf("Enter second number: ");
+            if(scanf("%d", &num2) == 1)
+            {
+                break;
+            }
+            else
+            {
+                printf("Please enter a number. \n");
+                while (getchar() != '\n');
+            }
         }
     }
 
-    printf("%f %c %f = ", num1, function, num2);
+    printf("%d %c %d = ", num1, function, num2);
 
     if(function == '+')
     {
-        result = add(num1, num2);
+        answer = add(num1, num2);
     }
     else if(function == '-')
     {
-        result = subtract(num1, num2);
+        answer = subtract(num1, num2);
     }
     else if(function == '*')
     {
-        result = multiply(num1, num2);
+        answer = multiply(num1, num2);
     }
     else if(function == '/')
     {
-        result = divide(num1, num2);
+        answer = divide(num1, num2);
     }
+    printf("%d",answer);
 
-    printf("%f\n", result);
     return 0;
 }
 
-float add(float i, float j) //addition function
+int add(int input1, int input2)
 {
-    return i + j;
+    return input1 + input2;
 }
 
-float subtract(float i, float j) //subtraction function
+int subtract(int input1, int input2)
 {
-    return i - j;
+    return input1 - input2;
 }
 
-float multiply(float i, float j) //multiply function
+int multiply(int input1, int input2)
 {
-    return i * j;
+    return input1 * input2;
 }
 
-float divide(float i, float j) //divide function
+int divide(int input1, int input2)
 {
-    return i / j;
+    return input1 / input2;
 }
