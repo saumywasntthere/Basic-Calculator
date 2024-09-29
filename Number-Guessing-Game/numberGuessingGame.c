@@ -4,65 +4,53 @@
 
 int main()
 {
-    int secretNumber;
-    int guessCount = 0;
-    int num1;
-    int num2;
-    int lowerLimit;
-    int higherLimit;
+    int num1, num2, lowerLimit, higherLimit, secretNumber;
     int guess;
+    int guessCount = 0;
 
-    printf("Enter the 2 (positive) numbers you want the random number to be between in (eg. 1 and 100).\n");
-    printf("Do not enter the same number. Once you enter 2 different numbers, keep on guessing until you guess it right. \n");
-    printf("You will be provided with hints. \n\n");
-    do
+    printf("This is a guessing game. \nYou have to enter 2 numbers, and i will select a random number between them.\nYou have to guess that number.\n");
+    printf("After each guess I will tell you if the secret number is higher than your guess or lower than your guess.\nBecause I know otherwise you would never be able to guess it right.\nhahaha\n\n");
+    while(1)
     {
-        while(1)
+        printf("Enter first number (a postive number): ");
+        if(scanf("%d", &num1) == 1 && num1 > 0)
         {
-            printf("First number: ");
-            if(scanf("%d", &num1) == 1)
-            {
-                break;
-            }
-            else
-            {
-                printf("Please enter a number. \n");
-                while (getchar() != '\n');
-            }
+            break;
         }
-        while(1)
+        else
         {
-            printf("Second number: ");
-            if(scanf("%d", &num2) == 1)
-            {
-                break;
-            }
-            else
-            {
-                printf("Please enter a number. \n");
-                while (getchar() != '\n');
-            }
+            printf("Enter a valid input (positive number).\n");
+            while (getchar() != '\n');
         }
-            if(num1 == num2 || num1 < 0 || num2 < 0)
-            {
-            printf("Please enter different numbers.\n\n");
-            }
     }
-    while(num1 == num2 || num1 < 0 || num2 < 0);
+    while(1)
+    {
+        printf("Enter second number (a postive number): ");
+        if(scanf("%d", &num2) == 1 && (num2 > 0) && (num1 != num2) )
+        {
+            break;
+        }
+        else
+        {
+            printf("Enter a valid input (positive number) that is not equal to the first number.\n");
+            while (getchar() != '\n');
+        }
+    }
 
-    if(num1 < num2)
-    {
-        lowerLimit = num1;
-        higherLimit = num2;
-    }
-    else
+    if(num1 > num2)
     {
         lowerLimit = num2;
         higherLimit = num1;
     }
+    else if(num2 > num1)
+    {
+        lowerLimit = num1;
+        higherLimit = num2;
+    }
 
     srand(time(NULL));
-    secretNumber = rand() % (higherLimit - lowerLimit + 1) + lowerLimit;
+
+    secretNumber = (rand() % (higherLimit - lowerLimit + 1)) + lowerLimit;
 
     do
     {
@@ -75,34 +63,33 @@ int main()
             }
             else
             {
-                printf("Please enter a number.\n");
-                while(getchar() != '\n');
+                printf("Enter a number.");
+                while (getchar() != '\n');
             }
         }
-        guessCount++;
-        if(guess < secretNumber)
+        if(secretNumber > guess)
         {
             printf("Higher\n");
         }
-        else if (guess > secretNumber)
+        else if(secretNumber < guess)
         {
             printf("Lower\n");
         }
-        else
-        {
-            printf("\nYou win!\n");
-        }
+        guessCount++;
     }
     while(guess != secretNumber);
 
-    if(guessCount == 1)
+    if(secretNumber == guess)
     {
-        printf("Amazing! You got it on your first guess.\n");
+        if(guessCount == 1)
+        {
+            printf("Congratulations! You Guessed Right! It was %d!\n", secretNumber);
+            printf("You only took 1 guess!");
+        }
+        else
+        {
+            printf("Congratulations! You Guessed Right! It was %d!\n", secretNumber);
+            printf("You took %d guesses.", guessCount);
+        }
     }
-    else
-    {
-        printf("You took %d guesses!\n", guessCount);
-    }
-
-    return 0;
 }
